@@ -1,0 +1,22 @@
+services:
+  database:
+    ports:
+      - "${POSTGRES_PORT}:5432"
+
+  backend:
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    volumes:
+      - backend_data: ./backend/src /app/src
+    ports:
+      - "${BACKEND_DEBUG_PORT}:5005"
+
+  frontend:
+    volumes:
+      - ./frontend:/app
+      - frontend/nodes_modules:/app/nodes_modules
+    ports:
+      - "${FRONTEND_DEV_PORT}:4200"
+
+volumes:
+  frontend_nodes_modules:
